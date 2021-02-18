@@ -5,6 +5,8 @@ const task = document.getElementById('input-task');
 document.querySelector('.add-btn').addEventListener('click', addTask);
 //event listener for deleting
 document.querySelector('#container').addEventListener('dblclick', deleteTask);
+//filter event
+document.querySelector('#input-search').addEventListener('keyup', filterTasks);
 
 function addTask(e) {
 	if (task.value === '') {
@@ -56,4 +58,18 @@ function deleteTask(e) {
 	}
 
 	e.preventDefault();
+}
+
+function filterTasks(e) {
+	search = e.target.value;
+
+	let tasks = Array.from(document.querySelectorAll('.task-item'));
+
+	tasks.forEach(function (task) {
+		if (task.textContent.indexOf(search) !== -1) {
+			task.style.display = 'block';
+		} else {
+			task.style.display = 'none';
+		}
+	});
 }
